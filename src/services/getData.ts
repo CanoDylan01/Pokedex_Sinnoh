@@ -12,10 +12,9 @@ export const getAllPokemon = async (offset: number, limit: number) =>{
     })
 }
 
-export const getPokemon = async (id:string) => {
+export const getPokemon = async (id:number) => {
   return axios.get(`${API_URL}pokemon/${id}`)
     .then(response => {
-      console.log(response.data)
       return response.data
     }
     )

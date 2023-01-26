@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/home/Home';
-import PokemonDetails from './pages/pokemonDetails/PokemonDetails';
+import PokemonInfo from './pages/pokemonDetails/PokemonInfo';
+import PokemonMovements from './pages/pokemonDetails/PokemonMovements';
+import PokemonPhotos from './pages/pokemonDetails/PokemonPhotos';
 
 const router = createBrowserRouter([
   {
@@ -10,8 +12,16 @@ const router = createBrowserRouter([
     element: <Home/>
   },
   {
-    path:"pokemon/:id",
-    element: <PokemonDetails/>
+    path:"pokemon/:id/info",
+    element: <PokemonInfo/>
+  },
+  {
+    path:"pokemon/:id/movements",
+    element: <PokemonMovements/>
+  },
+  {
+    path:"pokemon/:id/photos",
+    element: <PokemonPhotos/>
   }
 ])
 

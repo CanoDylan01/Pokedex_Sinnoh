@@ -8,10 +8,10 @@ interface props {
 export default function PokemonCard(listaPokemon: props) {
   const API_PICTURE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
   const [pokemon, setPokemon]: any = useState();
-  async function clickPokemon(url: string) {
+  /*async function clickPokemon(url: string) {
     const data = await getPokemon(url)
     setPokemon(data)
-  }
+  }*/
   return (
     <div>
       {listaPokemon
@@ -21,7 +21,7 @@ export default function PokemonCard(listaPokemon: props) {
         return (
           <div key={index} className="col-2 card my-1 mx-2" >
             <img className="img-size" src={API_PICTURE + id_pokedex + ".png"} alt={pokemon.name}></img>
-            <button type="button" className="btn btn-info btn-sm" onClick={e => clickPokemon(pokemon.url)}>{pokemon.name + " #" + id_pokedex} </button>
+            <button type="button" className="btn btn-info btn-sm" /*onClick={e => clickPokemon(pokemon.url)}*/>{pokemon.name + " #" + id_pokedex} </button>
           </div>
         )
       }):null}
