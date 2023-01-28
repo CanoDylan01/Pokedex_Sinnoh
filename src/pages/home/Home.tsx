@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/navBar/NavBar";
 import { getAllPokemon } from "../../services/getData"
 import "../home/Home.css"
 import { Link } from "react-router-dom";
+import FavoriteButton from "../../components/favoriteButton/FavoriteButton";
+import PokemonGrid from "../../components/pokemonGrid/PokemonGrid";
+import PokemonList from "../../components/pokemonList/PokemonList";
 
 
 export default function Home() {
-  const URL_PICTURE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
   const [listaPokemon, setListaPokemon]: any = useState();
   const [offset, setOffset]: any = useState(386);
   const [limit, setLimit]: any = useState(20);
+  const [state, setState] = useState(true);
 
   useEffect(() => {
     getData(offset, limit)
@@ -22,36 +25,27 @@ export default function Home() {
     setListaPokemon(data)
   }
 
+  function handleGrid() {
+    setState(true)
+  }
+  function handleList() {
+    setState(false)
+  }
+
   return (
     <>
       <NavBar />
       <section className="row">
-        <div className="col-1 text-center">
+        <div className="col-2 text-center">
           <h4>Favoritos</h4>
         </div>
-        <div className="card col-10 my-2 bg-danger">
-
-          <div className="container text-center bg-light">
-            <div className="row justify-content-center bg-light">
-              {listaPokemon
-                ? listaPokemon.results?.map((pokemon: any, index: any) => {
-                  let div = pokemon.url.split("/");
-                  let id_pokedex = div[div.length - 2]
-                  const firstLetter = pokemon.name.charAt(0).toUpperCase();
-                  const pokemonName = firstLetter + pokemon.name.slice(1);
-                  return (
-                    <div key={index} className="col-2 card my-1 mx-2 justify-content-center bg-white shadow" >
-                      <img className="img-size" src={URL_PICTURE + id_pokedex + ".png"} alt={pokemonName}></img>
-                      <button type="button" className="btn btn-light btn-sm ">
-                        <Link className="link-decoration text-dark" to={{
-                          pathname: `/pokemon/${id_pokedex}/info`
-                        }}>
-                          {`${pokemonName} #${id_pokedex}`}</Link>
-                      </button>
-                    </div>
-                  )
-                }) : null}
-            </div>
+        <div className="card col-8 my-2 bg-danger">
+          <div className="container bg-light">
+            {
+              state
+                ? <PokemonGrid listaPokemon={listaPokemon?.results} />
+                : <PokemonList listaPokemon={listaPokemon?.results} />
+            }
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-center">
                 <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={e => getData(offset - limit, limit)}>Previous</button></li>
@@ -62,15 +56,12 @@ export default function Home() {
               </ul>
             </nav>
           </div>
-
         </div>
-        <div className="col-1">
-          <button type="button" className="btn myButton cuad-icon my-1 me-6"></button>
-          <button type="button" className="btn myButton list-icon my-1 me-6"></button>
+        <div className="col-2 justify-content-center">
+          <button type="button" className="btn myButton cuad-icon my-1 mx-1" onClick={handleGrid}></button>
+          <button type="button" className="btn myButton list-icon my-1 mx-1" onClick={handleList}></button>
         </div>
       </section>
-
-
     </>
-  );
+  )
 }

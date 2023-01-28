@@ -1,0 +1,11 @@
+.fav-icon{
+  background-image: url('../../../public/isFav.png');
+  background-repeat: no-repeat;
+  background-color: yellow;
+  margin: 10px;
+}
+.notFav-icon{
+  background-image: url('../../../public/isNotFav.png');
+  background-repeat: no-repeat;
+  padding-left: 10px;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/navBar/NavBar";
 
 export default function PokemonMovements() {
   const URL_PICTURE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"

@@ -11,5 +11,6 @@ export default interface Pokemon {
   past_types: Array<any>,
   stats: Array<any>,
   types: Array<any>,
-  weight: number
+  weight: number,
+  url: string
 }
