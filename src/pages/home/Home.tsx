@@ -30,7 +30,8 @@ export default function Home() {
           <h4>Favoritos</h4>
         </div>
         <div className="card col-10 my-2 bg-danger">
-          <div className="container text-center ">
+
+          <div className="container text-center bg-light">
             <div className="row justify-content-center bg-light">
               {listaPokemon
                 ? listaPokemon.results?.map((pokemon: any, index: any) => {
@@ -39,7 +40,7 @@ export default function Home() {
                   const firstLetter = pokemon.name.charAt(0).toUpperCase();
                   const pokemonName = firstLetter + pokemon.name.slice(1);
                   return (
-                    <div key={index} className="col-2 card my-1 mx-2 justify-content-center bg-white" >
+                    <div key={index} className="col-2 card my-1 mx-2 justify-content-center bg-white shadow" >
                       <img className="img-size" src={URL_PICTURE + id_pokedex + ".png"} alt={pokemonName}></img>
                       <button type="button" className="btn btn-light btn-sm ">
                         <Link className="link-decoration text-dark" to={{
@@ -51,23 +52,25 @@ export default function Home() {
                   )
                 }) : null}
             </div>
+            <nav aria-label="Page navigation example">
+              <ul className="pagination justify-content-center">
+                <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={e => getData(offset - limit, limit)}>Previous</button></li>
+                {/*<li className="page-item"><a className="page-link" href="#">1</a></li>
+                 <li className="page-item"><a className="page-link" href="#">2</a></li>
+                 <li className="page-item"><a className="page-link" href="#">3</a></li>*/}
+                <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={e => getData(offset + limit, limit)}>Next</button></li>
+              </ul>
+            </nav>
           </div>
+
         </div>
-        <div className="col-1 text-center justify-content-center">
-          <button type="button" className="btn btn-primary my-1 me-6">Cuadricula</button>
-          <button type="button" className="btn btn-primary my-1 me-6">Lista</button>
+        <div className="col-1">
+          <button type="button" className="btn myButton cuad-icon my-1 me-6"></button>
+          <button type="button" className="btn myButton list-icon my-1 me-6"></button>
         </div>
       </section>
 
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item"><button className="btn btn-outline-danger mx-1" onClick={e => getData(offset - limit, limit)}>Previous</button></li>
-          {/*<li className="page-item"><a className="page-link" href="#">1</a></li>
-          <li className="page-item"><a className="page-link" href="#">2</a></li>
-          <li className="page-item"><a className="page-link" href="#">3</a></li>*/}
-          <li className="page-item"><button className="btn btn-outline-danger mx-1" onClick={e => getData(offset + limit, limit)}>Next</button></li>
-        </ul>
-      </nav>
+
     </>
   );
 }
