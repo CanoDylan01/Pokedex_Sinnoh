@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/navBar/NavBar";
 import { getAllPokemon } from "../../services/getData"
 import "../home/Home.css"
-import { Link } from "react-router-dom";
-import FavoriteButton from "../../components/favoriteButton/FavoriteButton";
 import PokemonGrid from "../../components/pokemonGrid/PokemonGrid";
 import PokemonList from "../../components/pokemonList/PokemonList";
-import Favorites from "../../components/favoriteButton/FavoriteButton";
-
 
 export default function Home() {
   const [listaPokemon, setListaPokemon]: any = useState();
   const [offset, setOffset]: any = useState(386);
   const [limit, setLimit]: any = useState(20);
   const [state, setState] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [color, setColor] = useState("white")
 
   useEffect(() => {
     getData(offset, limit)
@@ -26,6 +24,10 @@ export default function Home() {
     setListaPokemon(data)
   }
 
+  function handleDarkMode() {
+    setIsDark(!isDark)
+    isDark ? setColor("white") : setColor("dark")
+  }
   function handleGrid() {
     setState(true)
   }
@@ -36,9 +38,9 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <section className="row">
-        <div className="col-2 text-center">
-          
+      <section className={`row poke-classic bg-${color}`}>
+        <div className="col-2 text-center my-2">
+          <button onClick={handleDarkMode}>{isDark ? 'Modo Claro' : 'Modo Oscuro'}</button>
         </div>
         <div className="card col-8 my-2 bg-danger">
           <div className="container bg-light">
@@ -59,8 +61,8 @@ export default function Home() {
           </div>
         </div>
         <div className="col-2 justify-content-center">
-          <button type="button" className="btn myButton cuad-icon my-1 mx-1" onClick={handleGrid}></button>
-          <button type="button" className="btn myButton list-icon my-1 mx-1" onClick={handleList}></button>
+          <button type="button" className="btn myButton cuad-icon my-1 mx-1 bg-white" onClick={handleGrid}></button>
+          <button type="button" className="btn myButton list-icon my-1 mx-1 bg-white" onClick={handleList}></button>
         </div>
       </section>
     </>

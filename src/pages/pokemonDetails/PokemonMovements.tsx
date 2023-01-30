@@ -18,6 +18,12 @@ export default function PokemonMovements() {
     setPokemon(data)
     console.log(data)
   }
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
   return (
     <>
       <NavBar />
@@ -70,13 +76,13 @@ export default function PokemonMovements() {
         <nav className="my-2">
           <ul className="pagination justify-content-center">
             <li className="page-item">
-              <Link className="page-link" to={`/pokemon/${parseInt(pokemonID.id) - 1}/info`}>
+              <Link className="page-link" to={`/pokemon/${parseInt(pokemonID.id) - 1}/movements`} onClick={handleClick}>
                 {"<<"}
                 <img className="img-size-sm rounded" src={`${URL_PICTURE}${parseInt(pokemonID.id) - 1}.png`} alt={"pokemon"} />
               </Link>
             </li>
             <li className="page-item">
-              <Link className="page-link" to={`/pokemon/${parseInt(pokemonID.id) + 1}/info`}>
+              <Link className="page-link" to={`/pokemon/${parseInt(pokemonID.id) + 1}/movements`}  onClick={handleClick}>
                 <img className="img-size-sm rounded" src={`${URL_PICTURE}${parseInt(pokemonID.id) + 1}.png`} alt={"pokemon"} />
                 {">>"}
               </Link>

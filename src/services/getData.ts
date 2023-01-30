@@ -22,3 +22,14 @@ export const getPokemon = async (id:number) => {
       console.log(error)
     })
 }
+
+export const getPokemonByName = async (name: string) => {
+  return axios.get(`${API_URL}pokemon/${name}`)
+    .then(response => {
+      return response.data
+    }
+    )
+    .catch(error => {
+      console.log("No existe el pokemon " + name)
+    })
+}
