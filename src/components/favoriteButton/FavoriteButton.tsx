@@ -1,24 +1,43 @@
-import React, { useEffect, useState } from "react";
-import "../favoriteButton/FavoriteButton.css"
+import React, { useState, useEffect } from 'react';
+import FavoritePokemon from '../../models/FavoritePokemon';
+import Pokemon from '../../models/Pokemon.interface';
 
-export default function FavoriteButton() {
-  const [isFavorite, setIsFavorite] = useState(localStorage.getItem('isFavorite') === 'true')
-
-  function handleClick() {
-    setIsFavorite(!isFavorite)
-  }
+export default function FavoriteButton ({pokemon} : {pokemon: Pokemon}) {
+  const [favorites, setFavorites] = useState<FavoritePokemon[]>([]);
+  const [isfavorite, setIsFavorite] = useState(true);
 
   useEffect(() => {
-    localStorage.setItem('isFavorite', JSON.stringify(isFavorite));
-  }, [isFavorite])
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+  const handleAddFavorite = (id: number, name: string) => {
+    var favorite = {id: id, name:name}
+    const newFavorites = [...favorites, favorite];
+    setFavorites(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setIsFavorite(false)
+  };
+
+  const handleRemoveFavorite = (favoriteId: number) => {
+    const newFavorites = favorites.filter((f) => f.id !== favoriteId);
+    setFavorites(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setIsFavorite(true)
+
+  };
 
   return (
-    <button type="button" onClick={handleClick}>
-      {isFavorite ? (
-        <img src="../../../public/isFav.png" alt="Remove from favorites"/>
-      ) : (
-        <img src="../../../public/isNotFav.png" alt="Add to favorites" />
-      )}
-    </button>
-  )
-}
+    <div>
+      {
+        isfavorite ? (
+          <button className='btn btn-outline-warning' onClick={() => handleAddFavorite(pokemon.id, pokemon.name)}>Fav</button>
+        ) : (
+          <button className='btn btn-outline-warning' onClick={() => handleRemoveFavorite(pokemon.id)}>Eliminar Fav</button>
+        )
+      }
+    </div>
+  );
+};

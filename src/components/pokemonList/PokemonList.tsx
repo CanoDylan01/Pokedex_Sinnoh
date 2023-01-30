@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Pokemon from "../../models/Pokemon.interface";
+import FavoriteButton from "../favoriteButton/FavoriteButton";
+
 import "../pokemonList/PokemonList.css"
 
 export default function PokemonList({ listaPokemon }: { listaPokemon: Pokemon[] }) {
@@ -20,7 +22,7 @@ export default function PokemonList({ listaPokemon }: { listaPokemon: Pokemon[] 
                 <div className="col-3">
                   <div className="row img-size-list">
                     <img className="img-size-list" src={URL_PICTURE + id_pokedex + ".png"} alt={pokemonName} />
-                    <button type="button" className="btn btn-light btn-sm btn-size-list">
+                    <button type="button" className="btn btn-outline-danger btn-sm btn-size-list">
                       <Link className="link-decoration text-dark" to={{
                         pathname: `/pokemon/${id_pokedex}/info`
                       }}>
@@ -28,8 +30,8 @@ export default function PokemonList({ listaPokemon }: { listaPokemon: Pokemon[] 
                     </button>
                   </div>
                 </div>
-                <div className="col-9">
-                  ATR
+                <div className="col-9 d-flex">
+                  <FavoriteButton pokemon={pokemon}/>
                 </div>
               </section>
             </div>

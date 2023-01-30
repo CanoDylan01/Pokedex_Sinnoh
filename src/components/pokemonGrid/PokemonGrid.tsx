@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Pokemon from "../../models/Pokemon.interface";
+import FavoriteButton from "../favoriteButton/FavoriteButton";
 import "../pokemonGrid/PokemonGrid.css"
 
 export default function PokemonGrid({listaPokemon}: {listaPokemon: Pokemon[]}) {
@@ -15,15 +16,15 @@ export default function PokemonGrid({listaPokemon}: {listaPokemon: Pokemon[]}) {
           const firstLetter = pokemon.name.charAt(0).toUpperCase();
           const pokemonName = firstLetter + pokemon.name.slice(1);
           return (
-            <div key={index} className="col-2 card my-1 mx-2 justify-content-center bg-white shadow" >
+            <div key={index} className="col-2 card my-1 mx-2 justify-content-center bg-white shadow text-center" >
               <img className="img-size-grid" src={URL_PICTURE + id_pokedex + ".png"} alt={pokemonName}></img>
-
-              <button type="button" className="btn btn-light btn-sm ">
+              <button type="button" className="btn btn-outline-danger btn-sm ">
                 <Link className="link-decoration text-dark" to={{
                   pathname: `/pokemon/${id_pokedex}/info`
                 }}>
                   {`${pokemonName} #${id_pokedex}`}</Link>
               </button>
+              <FavoriteButton pokemon={pokemon}/>
             </div>
           )
         }) : null}

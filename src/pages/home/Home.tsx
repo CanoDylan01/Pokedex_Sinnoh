@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import FavoriteButton from "../../components/favoriteButton/FavoriteButton";
 import PokemonGrid from "../../components/pokemonGrid/PokemonGrid";
 import PokemonList from "../../components/pokemonList/PokemonList";
+import Favorites from "../../components/favoriteButton/FavoriteButton";
 
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
       <NavBar />
       <section className="row">
         <div className="col-2 text-center">
-          <h4>Favoritos</h4>
+          
         </div>
         <div className="card col-8 my-2 bg-danger">
           <div className="container bg-light">
@@ -48,11 +49,11 @@ export default function Home() {
             }
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-center">
-                <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={e => getData(offset - limit, limit)}>Previous</button></li>
+                <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={() => getData(offset - limit, limit)}>Anterior</button></li>
                 {/*<li className="page-item"><a className="page-link" href="#">1</a></li>
                  <li className="page-item"><a className="page-link" href="#">2</a></li>
                  <li className="page-item"><a className="page-link" href="#">3</a></li>*/}
-                <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={e => getData(offset + limit, limit)}>Next</button></li>
+                <li className="page-item"><button className="btn btn-outline-danger mx-1 mt-2" onClick={() => getData(offset + limit, limit)}>Siguiente</button></li>
               </ul>
             </nav>
           </div>

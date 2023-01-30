@@ -12,5 +12,7 @@ export default interface Pokemon {
   stats: Array<any>,
   types: Array<any>,
   weight: number,
-  url: string
+  url: string,
+  isFavorite: boolean,
+  sprites: any
 }
