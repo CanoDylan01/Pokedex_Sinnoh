@@ -40,7 +40,7 @@ export default function Home() {
       <NavBar />
       <section className={`row poke-classic bg-${color}`}>
         <div className="col-2 text-center my-2">
-          <button onClick={handleDarkMode}>{isDark ? 'Modo Claro' : 'Modo Oscuro'}</button>
+          <button className="btn rounded btn-outline-danger" onClick={handleDarkMode}>{isDark ? 'Modo Claro' : 'Modo Oscuro'}</button>
         </div>
         <div className="card col-8 my-2 bg-danger">
           <div className="container bg-light">
