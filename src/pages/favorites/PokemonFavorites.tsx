@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../components/navBar/NavBar";
+import { getPokemonByName } from "../../services/getData";
 interface FavoritePokemon {
   id: number;
   name: string;
@@ -14,10 +15,15 @@ export default function PokemonFavourites() {
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
     }
-  }, [favorites]);
+  }, []);
 
-  function handleRemoveAll(){
+  function handleRemoveAll() {
     localStorage.removeItem('favorites')
+  }
+
+   function getPokemon(name: string) {
+    const pokemon:any =  getPokemonByName(name)
+    return pokemon.id
   }
 
   return (
@@ -27,14 +33,18 @@ export default function PokemonFavourites() {
         <h2>Favorites</h2>
         <button className="btn btn-outline-danger" onClick={() => handleRemoveAll()}>Eliminar favoritos</button>
         <ul>
-          {favorites.map((favorite) => (
-            <li className="card" key={favorite.id}>
-              {favorite.name}{' '}
-              <div key={favorite.id} className="col-2 card my-1 mx-2 justify-content-center bg-white shadow text-center" >
-                <img className="img-size-grid" src={URL_PICTURE + 387 + ".png"} alt={"Pokemon"}></img>
-              </div>
-            </li>
-          ))}
+          {favorites ?
+            favorites.map((favorite, index) => {
+              let pokeId:any = getPokemon(favorite.name)
+              console.log(pokeId)
+              return (
+                <li className="card" key={index}>
+                  {favorite.name}{' '}
+                  <div key={favorite.id} className="col-2 card my-1 mx-2 justify-content-center bg-white shadow text-center" >
+                    <img className="img-size-grid" src={`${URL_PICTURE}${pokeId}.png`} alt={favorite.name}></img>
+                  </div>
+                </li>)
+            }) : null}
         </ul>
       </div>
     </>
